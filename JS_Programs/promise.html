@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>movies</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+      function newApiData() {
+        return new Promise(function (resolve, reject) {
+          let url = "http://showtimes.everyday.in.th/api/v2/movie/";
+          const HTTP = new XMLHttpRequest();
+          HTTP.open("GET", url);
+          HTTP.responseType = "json";
+          HTTP.send();
+
+          HTTP.onreadystatechange = function () {
+            if (this.readyState == 4 && this.state == 200) {
+              console.log(HTTP.response);
+            } else if (this.state == 404) {
+              //console.log(HTTP.response);
+            }
+          };
+        });
+      }
+      const display = () => {
+        let S = data.results;
+        let movies = "";
+        for (let i = 0; i <= S.length - 1; i++) {
+          let a = S[i];
+          movies += ` <li>
+                           <div>
+                            <p>${a.title}</p>
+                            </div>
+                        </li>`;
+        }
+      };
+
+      const successCb = (data) => {
+        document.getElementById("container").innerHTML = display(data.results);
+      };
+      const errorCb = (data) => {
+        console.log(data);
+      };
+      newApiData().then(successCb, errorCb);
+    </script>
+  </body>
+</html>

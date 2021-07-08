@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        firstName: "gopi",
+        lastName: "chand",
+        age: 27,
+        addr: "hyd",
+        fullName: function () {
+          return this.firstName + " " + this.lastName;
+        },
+      };
+
+      let person = obj; // obj is stored in person variable. we can change the object properties
+      person.age = 10; // now age is 10
+      console.log(obj.fullName(), obj["addr"], obj["age"]);
+
+      // iterating object
+      for (let x in person) {
+        console.log(person[x]);
+      }
+
+      // adding new properties to object
+      obj.gender = "Male";
+      console.log(obj["gender"]);
+
+      // deleting a property from object
+      delete obj.addr;
+
+      // Nested objects
+
+      myObj = {
+        name: "John",
+        age: 30,
+        cars: {
+          car1: "Ford",
+          car2: "BMW",
+          car3: "Fiat",
+        },
+      };
+
+      // accessing nested objects
+
+      console.log(myObj.cars["car3"] + " " + myObj.cars.car1);
+
+      // Nested Arrays and Objects
+
+      const myObj1 = {
+        name: "John",
+        age: 30,
+        cars: [
+          { name: "Ford", models: ["Fiesta", "Focus", "Mustang"] },
+          { name: "BMW", models: ["320", "X3", "X5"] },
+          { name: "Fiat", models: ["500", "Panda"] },
+        ],
+      };
+
+      for (let z in myObj1.cars) {
+        console.log(myObj1.cars[z].name);
+        for (let w in myObj1.cars[z].models) {
+          console.log(myObj1.cars[z].models[w]);
+        }
+      }
+
+      //getters & setters
+
+      var person1 = {
+        firstName: "John",
+        lastName: "Doe",
+        language: "en",
+        get lang() {
+          return this.language;
+        },
+      };
+      console.log(person1.lang);
+
+      var person2 = {
+        firstName: "John",
+        lastName: "Doe",
+        language: "",
+        set lang(lang) {
+          this.language = lang;
+        },
+      };
+
+      person2.lang = "telugu";
+      console.log(person2.language);
+
+      var obj2 = { counter: 0 };
+
+      // Define Setters and Getters
+      Object.defineProperty(obj2, "reset", {
+        get: function () {
+          this.counter = 0;
+        },
+      });
+      Object.defineProperty(obj2, "increment", {
+        get: function () {
+          this.counter++;
+        },
+      });
+      Object.defineProperty(obj2, "decrement", {
+        get: function () {
+          this.counter--;
+        },
+      });
+      Object.defineProperty(obj2, "add", {
+        set: function (value) {
+          this.counter += value;
+        },
+      });
+      Object.defineProperty(obj2, "subtract", {
+        set: function (value) {
+          this.counter -= value;
+        },
+      });
+
+      // Play with counter:
+      obj2.reset;
+      obj2.add = 5;
+      obj2.subtract = 1;
+      obj2.increment;
+      obj2.decrement;
+      obj2.add = 4;
+      console.log(obj2.counter);
+
+      // Constructor function for Person objects
+      function Person(first, last, age, eye) {
+        this.firstName = first;
+        this.lastName = last;
+        this.age = age;
+        this.eyeColor = eye;
+      }
+
+      // Create two Person objects
+      var myFather = new Person("John", "Doe", 50, "blue");
+      var myMother = new Person("Sally", "Rally", 48, "green");
+      console.log(myFather.lastName + " " + myMother.firstName);
+
+      //prototype property allows you to add new properties to object constructors
+      function Person(first, last, age, eyecolor) {
+        this.firstName = first;
+        this.lastName = last;
+        this.age = age;
+        this.eyeColor = eyecolor;
+      }
+
+      Person.prototype.nationality = "English";
+
+      // add new methods to object constructors
+      function Person(first, last, age, eyecolor) {
+        this.firstName = first;
+        this.lastName = last;
+        this.age = age;
+        this.eyeColor = eyecolor;
+      }
+
+      Person.prototype.name = function () {
+        return this.firstName + " " + this.lastName;
+      };
+    </script>
+  </body>
+</html>

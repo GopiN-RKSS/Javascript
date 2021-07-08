@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      body{
+        overflow-x: hidden;
+      }
+      img{
+        height: 300px;
+        max-height: 300px;
+        width: 500px;
+      }
+      p{
+        text-align: justify;
+      }
+    </style>
+  </head>
+
+<body>
+  <div id="news-content"></div>
+</body>
+<script>
+    const arr = [
+        {
+            'img' : 'https://www.si.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_700/MTgxNjUxMjcyMTkxOTc2NzA2/pete-alonso-ball-consipircy.webp',
+            'title': 'Cherish This Baseball Season; We Might Be in for Another Long Offseason',
+            'description': 'Its a known fact MLB manipulates the baseballs. But how does that impact the players trust of the league as the current CBA is set to expire after this season?It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+            'author' : 'WILL LAWS'
+        },{
+            'img' : 'https://www.si.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_700/MTgxNjY5ODIzMjI5NDY5ODYy/rome-euro-fan-zone.webp',
+            'title': 'Romes Restricted Re-Opening for Euro 2020 Helps Italy Begin to Heal',
+            'description': 'In Rome’s UEFA fan zones for Friday’s Euro 2020 opener between Italy and Turkey, Italians were able to smile, celebrate and sing in droves once again.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+            'author' : 'Andrew GASTELUM'
+        },
+        {
+            'img' : 'https://www.si.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_700/MTgxNjY5ODIzMjI5NDY5ODYy/rome-euro-fan-zone.webp',
+            'title': 'Romes Restricted Re-Opening for Euro 2020 Helps Italy Begin to Heal',
+            'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+            'author' : 'Andrew GASTELUM'
+        },
+
+    ];
+
+    const container = document.getElementById('news-content');
+    let displayArrayList;
+    
+    
+    function newsPage(arrList) {
+        displayArrayList = arrList.map(element => {
+            return ` 
+                      <div class="mx-5 mt-5 row row-cols-1 row-cols-lg-2">
+                        <div class="col">
+                          <img src="${element.img}" class="image-fluid"/>
+                        </div>
+                        <div class="col">
+                          <h3>${element.title}</h3>
+                          <p>${element.description}</p>
+                          <h5>-${element.author}</div>
+                        </div>
+                      </div>
+                    
+                    `;
+        });
+        return displayArrayList;
+    }
+    let news = newsPage(arr);
+    container.innerHTML = news;
+</script>
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

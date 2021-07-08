@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion Sort</title>
+</head>
+<body>
+    <script>
+        let arr = [4, 3, 2, 10, 12, 1, 5, 6];
+        for(let i=1;i<=arr.length-1;i++){
+            let current = arr[i];
+            let j = i-1;
+            while(j>=0 && arr[j] > current){
+                arr[j+1]=arr[j];
+                j--;
+                arr[j + 1] = current;
+            }
+            
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>

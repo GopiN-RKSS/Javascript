@@ -1,0 +1,212 @@
+// Class
+class Person {
+  //peroperty
+  name: string;
+  age: number;
+
+  // constructor
+  constructor(n: string, a: number) {
+    this.name = n;
+    this.age = a;
+  }
+
+  // method
+  getPersonDetails() {
+    console.log(`I'm name is ${this.name}
+                I'm age is ${this.age}`);
+  }
+}
+
+//instance
+const person1 = new Person("Guru", 28);  //instansitation
+const person2 = new Person("prasad", 30);
+
+console.log( person1 instanceof Person);
+
+// accessing properties 
+console.log(person1.age);
+console.log(person1.name);
+//accessing methods
+person1.getPersonDetails(); 
+person2.getPersonDetails();
+===================================
+
+// Class
+class Person{
+    // shortHand
+    constructor(public name:string, private age:number){
+        this.name = name;
+        this.age = age;
+    }
+
+    getAge(){
+        console.log(this.age);
+    }
+}
+
+const personI = new Person("Hari", 45);
+personI.getAge();
+=========================================
+// Class
+class Person{
+    
+    readonly ethnicGroup: string = "Indian";
+
+    // shortHand
+    constructor(public name:string, private age:number){
+        this.name = name;
+        this.age = age;
+    }
+
+    getAge(){
+        console.log(this.age, this.ethnicGroup);
+    }
+}
+
+const personI = new Person("Hari", 45);
+personI.getAge();
+=================================================
+
+// Class
+class Person {
+  constructor(public name: string) {
+    this.name = name;
+  }
+  
+  printJob(){
+    console.log("Parent:::: PrintJob");
+  }
+}
+
+class Student extends Person {
+  constructor(name: string, public job: string) {
+    super(name);
+    this.job = job;
+  }
+}
+
+let studentRam = new Student("Ram", "goingToSchool");
+//console.log(studentRam);
+
+
+class Employee extends Person{
+    constructor(name:string,public job:string){
+        super(name);
+        this.job = job;
+    }
+
+    printJob(){
+        console.log("child:  I'm employee");
+    }
+}
+
+let employeeRam = new Employee("Hari","goingToOffice");
+//console.log(employeeRam);
+studentRam.printJob();
+employeeRam.printJob();
+
+===================================================================
+
+// Class
+class Person{
+    private name:string="";
+
+    get personName(){
+        return this.name;
+    }
+
+    set personName(name){
+        this.name = name;
+    }
+
+}
+
+let person = new Person();
+
+person.personName = "Guruprasad";
+person.personName = "hariPrasad";
+
+console.log(person.personName);
+
+// getter and setter
+
+==============================================================
+
+// Class
+// static methods
+ class MyMath{
+    static PI:string = "3.14";
+
+    static pow(value:number,result:(value:number)=>void){
+        result(value*value);
+        console.log("PI", this.PI);
+    }
+
+
+ }
+
+console.log(MyMath.PI);
+console.log(MyMath.pow(10,(v)=>console.log("Result:",v)));
+
+=============================================================
+// abstract methods
+abstract class Bank{
+    abstract deposit(amt: number):void;
+    abstract withdraw(amt:number):void;
+}
+
+class GuruBank extends Bank{
+
+    constructor(public amount:number){
+        super();
+        this.amount = amount;
+    }
+
+    deposit(amt:number){
+        this.amount+=amt;
+    }
+
+    withdraw(amt:number){
+        this.amount-=amt;
+    }
+
+    totalBalance(){
+        console.log(this.amount);
+    }
+
+}
+
+let newGuruBank = new GuruBank(0);
+newGuruBank.totalBalance();
+
+newGuruBank.deposit(100000);
+newGuruBank.totalBalance();
+
+newGuruBank.withdraw(10000);
+newGuruBank.totalBalance();
+====================================================================
+
+// Class  singleton class
+class Bank {
+    static instance:Bank;
+    
+    private constructor(public amount:number){
+        this.amount = amount;
+    }
+
+    static getInstance(){
+        if(this.instance){
+            return this.instance;
+        }
+        this.instance = new Bank(0);
+        return this.instance;
+
+    }
+}
+
+//let newBank = new Bank(100);
+
+
+console.log(Bank.getInstance());
+console.log(Bank.getInstance());
+================================================

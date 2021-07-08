@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px 15px;
+            border: 1px solid rgb(41, 40, 40);
+        }
+
+        th {
+            font-size: 1rem;
+        }
+
+        th::first-letter {
+            text-transform: uppercase;
+            color: red;
+        }
+
+        ul {
+            display: flex;
+        }
+
+        li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    </div>
+    <div id="pagination">
+        <ul>
+            <li><button>1</button></li>
+            <li><button>2</button></li>
+        </ul>
+    </div>
+    <script src="./users.js"></script>
+    <script>
+        let container = document.getElementById('container');
+
+        const tbody = () => {
+            let tableData = "";
+
+            let filteredUser = users.filter((user, index) => {
+                return (user.city == 'Maule')
+            });
+
+            for (let i = 0; i <= filteredUser.length - 1; i++) {
+                let user = filteredUser[i];
+                tableData += `<tr>
+                    <td>${user.name}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.email}</td>
+                    <td>${user.company}</td>
+                    <td>${user.date_entry}</td>
+                    <td>${user.org_num}</td>
+                    <td>${user.address_1}</td>
+                    <td>${user.city}</td>
+                    <td>${user.zip}</td>
+                    <td>${user.geo}</td>
+                    <td>${user.pan}</td>
+                    <td>${user.pin}</td>
+                    <td>${user.id}</td>
+                    <td>${user.status}</td>
+                    <td>${user.fee}</td>
+                    <td>${user.guid}</td>
+                    <td>${user.date_exit}</td>
+                    <td>${user.date_first}</td>
+                    <td>${user.date_recent}</td>
+                    <td>${user.url}</td>
+                </tr>`;
+            }
+            return `<tbody>${tableData}</tbody>`;
+        }
+
+        const thead = _ => `<thead>
+                <tr>
+                    <th onclick=alert('name')>name</th>
+                    <th>phone</th>
+                    <th>email</th>
+                    <th>company</th>
+                    <th>date_entry</th>
+                    <th>org_num</th>
+                    <th>address_1</th>
+                    <th>city</th>
+                    <th>zip</th>
+                    <th>geo</th>
+                    <th>pan</th>
+                    <th>pin</th>
+                    <th>id</th>
+                    <th>status</th>
+                    <th>fee</th>
+                    <th>guid</th>
+                    <th>date_exit</th>
+                    <th>date_first</th>
+                    <th>date_recent</th>
+                    <th>url</th>
+                </tr>
+            </thead>`;
+
+        const table = _ => `<table>${thead()}${tbody()}</table>`;
+        const displayTable = _ => (container.innerHTML = `${table()}`);
+
+        displayTable();
+    </script>
+</body>
+
+</html>

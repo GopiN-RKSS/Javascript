@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      label,
+      input {
+        margin: 15px;
+      }
+      table,
+      td,
+      th {
+        border: 1px solid gray;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="myForm">
+      <label for="FirstName">First Name:</label>
+      <input type="text" id="firstname" />
+      <label for="LastName">Last Name:</label>
+      <input type="text" id="lastname" /><br />
+      <input type="button" id="btn-submit" value="submit" />
+    </form>
+    <div id="container"></div>
+    <script>
+      const containerElement = document.getElementById("container");
+      const firstNameElement = document.getElementById("firstname");
+      const lastNameElement = document.getElementById("lastname");
+      const submitButtonElement = document.getElementById("btn-submit");
+      const formElement = document.querySelector("form");
+      let userList = [];
+
+      function onPageLoad() {
+        submitButtonElement.addEventListener("click", submitFormValues);
+        showTable();
+        updateTable();
+      }
+      onPageLoad();
+
+      function submitFormValues(e) {
+        e.preventDefault();
+        userList.push(getFormValues());
+        formElement.reset();
+        updateTable();
+      }
+
+      function getFormValues() {
+        let formValues = {};
+        formValues.firstName = firstNameElement.value;
+        formValues.lastName = lastNameElement.value;
+        return formValues;
+      }
+
+      function showTable() {
+        const thead = `<thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>remove</th>
+                            </tr>
+                        </thead>`;
+        const tbody = `<tbody id="tableBody"></tbody>`;
+        const table = () => `<table>${thead}${tbody}</table>`;
+        containerElement.innerHTML = table();
+      }
+
+      const tableRow = (user, index) => `<tr >
+                                  <td>${user.firstName}</td>
+                                  <td>${user.lastName}</td>
+                                  <td><button name="remove" onclick="remove('${index}')"/>remove</td>
+                                </tr> `;
+
+      function getTableRows() {
+        let displayUsersList = [...userList];
+        let rows = "";
+        displayUsersList.forEach((user, index) => {
+          rows += tableRow(user, index);
+        });
+        return rows;
+      }
+
+      function updateTable() {
+        const tBody = document.querySelector("#tableBody");
+        tBody.innerHTML = "";
+        tBody.innerHTML = getTableRows();
+      }
+    </script>
+  </body>
+</html>

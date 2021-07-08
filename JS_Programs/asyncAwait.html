@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function makeRequest(location) {
+        return new Promise((resolve, reject) => {
+          console.log("location", location);
+          if (location == "google") {
+            resolve("google");
+          } else {
+            reject("can not reach to google");
+          }
+        });
+      }
+
+      function processRequest(response) {
+        return new Promise((resolve, reject) => {
+          console.log("processing response");
+          resolve("response", response);
+        });
+      }
+
+      async function doWork() {
+        try {
+          const response = await makeRequest("google");
+          console.log("response received");
+          const prossedResponse = await processRequest(response);
+          console.log("response processed");
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      doWork();
+    </script>
+  </body>
+</html>

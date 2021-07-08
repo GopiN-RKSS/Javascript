@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            let arr = [[2, 10, 11], [6, 24, 5], [8, 9, 4], [21, 7, 3]];
+            let outputArr = [];
+            // output [23,35,21,31]
+            for(let i=0; i<=arr.length-1;i++){
+                outputArr[i]=0;
+                for(let j=0; j<=arr[i].length-1;j++){
+                    outputArr[i] += arr[i][j];
+                    console.log(arr[i][j]); 
+                }
+            }
+            console.log(outputArr);
+    </script>
+</body>
+</html>

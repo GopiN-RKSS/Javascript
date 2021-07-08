@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let vowelString = "aeiou";
+        let givenString = "alappuzha";
+            givenString = givenString.split("");
+            
+            let givenStringLength = givenString.length - 1;
+            for (let i = 0, j = givenStringLength; i < j; i++, j--) {
+            
+                while (i <= j && vowelString.indexOf(givenString[i].toLowerCase()) == -1) {
+                    i++;
+                }
+            
+                while (j >= i && vowelString.indexOf(givenString[j].toLowerCase()) == -1) {
+                    j--;
+                }
+            
+                if (i < j) {
+                    let temp = givenString[i];
+                    givenString[i] = givenString[j];
+                    givenString[j] = temp;
+                }
+            }
+            
+            console.log(givenString.join(""));
+    </script>
+</body>
+</html>

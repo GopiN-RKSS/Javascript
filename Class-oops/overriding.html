@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            show() {
+                console.log(this.name + " " + this.age);
+            }
+        }
+        class Student extends Person {
+            constructor(name, age, school) {
+                super(name, age);
+                this.school = school;
+            }
+            // show() {
+            //     console.log(this.name + " " + this.age + " " + this.school);
+            // }
+        }
+         class Employee extends Person {
+                constructor(name, age, job) {
+                    super(name, age);
+                    this.job = job;
+                }
+                show() {
+                    console.log(this.name + " " + this.age + " " + this.job);
+                }
+            }
+        let student1 = new Student("gopi", 27, "ZPHS");
+        let employee1 = new Employee("dhoni", 27, "software");
+        student1.show(); // it will access parent method
+        employee1.show();
+    </script>
+</body>
+
+</html>

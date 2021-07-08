@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      label,
+      input {
+        margin: 15px;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        border: 1px solid gray;
+        width: 150px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <label for="FirstName">First Name:</label>
+      <input type="text" id="firstname" />
+      <label for="LastName">Last Name:</label>
+      <input type="text" id="lastname" /><br />
+      <label for="gender">Gender:</label>
+      <input type="radio" id="male" name="gender" value="Male" />Male
+      <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="Female"
+      />Female<br />
+      <label for="languages">Languages:</label>
+      <input type="checkbox" id="english" class="lang" value="English" />English
+      <input type="checkbox" id="telugu" class="lang" value="Telugu" />Telugu
+      <input type="checkbox" id="hindi" class="lang" value="Hindi" />Hindi<br />
+      <label for="languages">State:</label>
+      <select name="dropdown" id="state">
+        <option value="TS">Telangana</option>
+        <option value="AP">Andhra Pradesh</option>
+        <option value="KS">Karnataka</option>
+      </select>
+      <br />
+      <button id="submit-btn" class="btn btn-primary ms-2" value="submit">
+        Submit
+      </button>
+      <input type="submit" value="cancel" />
+    </form>
+    <br /><br />
+    <div id="container"></div>
+    <br />
+    <nav aria-label="Page navigation example">
+      <ul class="pagination ms-5">
+        <li class="page-item" onclick="previous()">
+          <a class="page-link" href="#">Previous</a>
+        </li>
+        <li class="page-item" onclick="next()">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+    <script>
+      const containerElement = document.querySelector("#container");
+      const submitButtonElement = document.querySelector("#submit-btn");
+      const firstNameElement = document.querySelector("#firstname");
+      const lastNameElement = document.querySelector("#lastname");
+      const genderElements = document.querySelectorAll('input[name="gender"]');
+      const languageElements = document.getElementsByClassName("lang");
+      const stateElement = document.querySelector("#state");
+      const formElement = document.querySelector("form");
+      const perPageRowsCount = 2;
+      let topRowElementIndex = 0;
+      let bottomRowElementIndex = topRowElementIndex + perPageRowsCount - 1;
+
+      const userList = [];
+
+      function onPageLoad() {
+        submitButtonElement.addEventListener("click", submitFormValues);
+        showTable();
+        updateTable();
+      }
+
+      function submitFormValues(e) {
+        e.preventDefault();
+        userList.push(getFormValues());
+        formElement.reset();
+        updateTable();
+      }
+
+      const getSelectedGender = () =>
+        [...genderElements].filter((element) => element?.checked)[0]?.value;
+
+      const getSelectedLanguageValues = () =>
+        [...languageElements]
+          .filter((element) => element?.checked)
+          .map((element) => element.value);
+
+      const remove = (row) => {
+        userList.splice(row, 1);
+        updateTable();
+      };
+
+      function getFormValues() {
+        let formValues = {};
+        formValues.name = firstNameElement.value + " " + lastNameElement.value;
+        formValues.gender = getSelectedGender();
+        formValues.language = getSelectedLanguageValues();
+        formValues.state = stateElement.value;
+        return formValues;
+      }
+
+      function showTable() {
+        const thead = `<thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Gender</th>
+                                <th>Languages</th>
+                                <th>state</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>`;
+        const tbody = "<tbody id='tableBody'></tbody>";
+        const table = () => `<table>${thead}${tbody}</table>`;
+        containerElement.innerHTML = "";
+        containerElement.innerHTML = table();
+      }
+
+      const tableRow = (user, index) => `<tr >
+                                  <td>${user.name}</td>
+                                  <td>${user.gender}</td>
+                                  <td>${user.language.join(",")}</td>
+                                  <td>${user.state}</td>
+                                  <td><button name="remove" onclick="remove('${index}')"/>remove</td>
+                                </tr> `;
+
+      function getTableRows() {
+        let displayUsersList = [...userList].splice(topRowElementIndex, 2);
+        let rows = "";
+        displayUsersList.forEach((user, index) => {
+          rows += tableRow(user, index);
+        });
+
+        return rows;
+      }
+
+      function updateTable() {
+        const tBody = document.querySelector("#tableBody");
+        tBody.innerHTML = "";
+        tBody.innerHTML = getTableRows();
+      }
+
+      const previous = () => {
+        if (!topRowElementIndex) return;
+
+        topRowElementIndex = topRowElementIndex - perPageRowsCount;
+        bottomRowElementIndex = topRowElementIndex + perPageRowsCount - 1;
+        updateTable();
+      };
+
+      const next = () => {
+        console.log(bottomRowElementIndex, userList.length - 1);
+        if (bottomRowElementIndex >= userList.length) return;
+
+        topRowElementIndex = bottomRowElementIndex + 1;
+        bottomRowElementIndex = topRowElementIndex + perPageRowsCount - 1;
+        updateTable();
+      };
+      onPageLoad();
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

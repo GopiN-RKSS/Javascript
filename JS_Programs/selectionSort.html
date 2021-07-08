@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array = [6,4,2,4,0,7,14,3,1,5];
+        let temp;
+            for(let i=0;i<=array.length-1;i++){
+                let min = i;
+                for(let j = i+1; j <= array.length - 1; j++){
+                    if (array[j]<array[min]) {
+                        min = j;
+                    }
+                }
+                    if(min!=i){
+                        temp=array[i];
+                        array[i]=array[min];
+                        array[min]=temp;
+                    }
+            }
+            console.log(array);
+    </script>
+</body>
+</html>
